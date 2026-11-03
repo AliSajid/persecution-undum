@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+#MISE description="Build the HTML5 game for distribution"
+#MISE sources=["games/**", ".itch.toml"]
+#MISE outputs=["dist/itch"]
+
+ROOT="${MISE_PROJECT_ROOT:?}"
+SOURCE="${ROOT}/games"
+OUTPUT="${ROOT}/dist/itch"
+
+echo "Building Evolution..."
+
+if [[ ! -s "${SOURCE}/index.html" ]]; then
+    echo "Error: games/index.html not found or empty" >&2
+    exit 1
+fi
+
+if [[ ! -f "${ROOT}/.itch.toml" ]]; then
+    echo "Error: .itch.toml not found" >&2
+    exit 1
+fi
+
+rm -rf "${OUTPUT}"
+mkdir -p "${OUTPUT}"
+
+cp -a "${SOURCE}/." "${OUTPUT}/"
+cp "${ROOT}/.itch.toml" "${OUTPUT}/.itch.toml"
+
+test -s "${OUTPUT}/index.html"
+
+echo "Build complete: ${OUTPUT}"

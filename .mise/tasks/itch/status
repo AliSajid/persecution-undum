@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+#MISE description="Check the status of the published game"
+#MISE depends=["itch:publish"]
+
+: "${ITCH_TARGET:?Set ITCH_TARGET in mise.toml}"
+
+butler status "${ITCH_TARGET}"
