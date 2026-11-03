@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+#MISE description="Preview changes against the itch.io channel"
+#MISE depends=["build"]
+
+ROOT="${MISE_PROJECT_ROOT:?}"
+
+: "${ITCH_TARGET:?Set ITCH_TARGET in mise.toml}"
+
+butler push-preview "${ROOT}/dist/itch" "${ITCH_TARGET}"

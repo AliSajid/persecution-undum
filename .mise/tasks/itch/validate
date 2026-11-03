@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+#MISE description="Validate the HTML5 distribution"
+#MISE depends=["build"]
+
+ROOT="${MISE_PROJECT_ROOT:?}"
+
+butler validate "${ROOT}/dist/itch"

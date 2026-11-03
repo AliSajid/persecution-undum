@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+#MISE description="Publish the HTML5 game to itch.io"
+#MISE depends=["itch:validate"]
+
+#USAGE flag "--version <version>" help="Set the itch.io build version"
+
+ROOT="${MISE_PROJECT_ROOT:?}"
+
+: "${ITCH_TARGET:?Set ITCH_TARGET in mise.toml}"
+
+ARGS=()
+
+if [[ -n "${usage_version:-}" ]]; then
+    ARGS+=(--userversion "${usage_version}")
+fi
+
+butler push \
+    "${ROOT}/dist/itch" \
+    "${ITCH_TARGET}" \
+    "${ARGS[@]}"
