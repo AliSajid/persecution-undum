@@ -13,7 +13,8 @@ ITCH_TARGET = "banseljaj/persecution:html5"
 
 [tasks.serve]
 description = "Serve the games directory using a minimal web server for local preview"
-run = "python -m http.server 8000 --bind 127.0.0.1 --directory ."
+run = "python -m http.server 8000 --bind 127.0.0.1 --directory dist/itch"
+depends = "build"
 
 [tasks.lint]
 description = "Check every file"
