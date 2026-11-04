@@ -1,0 +1,38 @@
+amends "package://github.com/jdx/hk/releases/download/v2.10.0/hk@2.10.0#/Config.pkl"
+
+import "package://github.com/jdx/hk/releases/download/v2.10.0/hk@2.10.0#/Builtins.pkl"
+
+exclude =
+  List(
+    "games/media/js/**",
+    "games/media/css/undum*.css",
+    "games/media/img/**",
+  )
+
+steps {
+  // Hygiene (builtin names from memory; confirm with `hk builtins`)
+  ["trailing-whitespace"] = Builtins.trailing_whitespace
+  ["newlines"] = Builtins.newlines
+  ["merge-conflict"] = Builtins.check_merge_conflict
+  ["case-conflict"] = Builtins.check_case_conflict
+  ["private-key"] = Builtins.detect_private_key
+
+  // Lint only, no formatting yet, so the first run doesn't rewrite evolution.game.js
+  ["biome-lint"] {
+    glob = List("**/*.js", "**/*.json")
+    check = "biome lint {{files}}"
+  }
+
+  ["markdownlint"] {
+    glob = List("**/*.md")
+    check = "markdownlint-cli2 {{files}}"
+    fix = "markdownlint-cli2 --fix {{files}}"
+  }
+
+  ["cspell"] {
+    glob = List("**/*.js", "**/*.html", "**/*.md")
+    check = "cspell lint --no-progress --no-must-find-files {{files}}"
+  }
+
+  ["gitleaks"] = Builtins.gitleaks
+}
