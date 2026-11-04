@@ -6,10 +6,10 @@ set -euo pipefail
 #MISE outputs=["dist/itch"]
 
 ROOT="${MISE_PROJECT_ROOT:?}"
-SOURCE="${ROOT}/games"
+SOURCE="${ROOT}"
 OUTPUT="${ROOT}/dist/itch"
 
-echo "Building Evolution..."
+echo "Building Persecution..."
 
 if [[ ! -s "${SOURCE}/index.html" ]]; then
     echo "Error: games/index.html not found or empty" >&2
@@ -24,7 +24,8 @@ fi
 rm -rf "${OUTPUT}"
 mkdir -p "${OUTPUT}"
 
-cp -a "${SOURCE}/." "${OUTPUT}/"
+cp -a "${SOURCE}/index.html" "${OUTPUT}/"
+cp -a "${SOURCE}/media" "${OUTPUT}/"
 cp "${ROOT}/.itch.toml" "${OUTPUT}/.itch.toml"
 
 test -s "${OUTPUT}/index.html"

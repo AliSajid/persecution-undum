@@ -9,7 +9,7 @@ markdownlint-cli2 = "0.24.0"
 python = "3.14.10"
 
 [env]
-ITCH_TARGET = "banseljaj/evolution:html5"
+ITCH_TARGET = "banseljaj/persecution:html5"
 
 [tasks.serve]
 description = "Serve the games directory using a minimal web server for local preview"
